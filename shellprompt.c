@@ -17,7 +17,7 @@ void prompt(char **av, char **env)
 	while (1)
 	{
 		if(isatty(STDIN_FILENO))
-		printf("Simpleshell#");
+		printf("cisfun$");
 		read_chars = getline(&bufferadd, &k, stdin);
 		if (read_chars == -1)
 		{
@@ -42,7 +42,7 @@ void prompt(char **av, char **env)
 		{
 			if (execve(argv[0], argv, env) == -1)
 			{
-				printf("%s:No file in working directory\n", av[0]);
+				printf("%s:No such file or directory\n", av[0]);
 			}
 			else
 				wait(&s);
