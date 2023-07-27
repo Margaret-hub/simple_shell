@@ -1,5 +1,4 @@
 #include "simpleshell.h"
-#include <sys/wait.h>
 /**
 *prompt - prompts user to enter command
 *@av: pointers to characters
@@ -8,7 +7,7 @@
 */
 void prompt(char **av, char **env)
 {
-	char *bufferadd = NULL, *enter = "SimpleShell# ";
+	char *bufferadd = NULL;
 	int n, s;
 	size_t k = 0;
 	ssize_t read_chars;
@@ -17,7 +16,8 @@ void prompt(char **av, char **env)
 
 	while (1)
 	{
-		printf("%s", enter);
+		if(isatty(STDIN_FILENO))
+		printf("Simpleshell#");
 		read_chars = getline(&bufferadd, &k, stdin);
 		if (read_chars == -1)
 		{
@@ -26,7 +26,7 @@ void prompt(char **av, char **env)
 		}
 		n = 0;
 		while (bufferadd[n])
-		{
+		{ 
 			if (bufferadd[n] == '\n')
 			bufferadd[n] = 0;
 			n++;
@@ -42,7 +42,7 @@ void prompt(char **av, char **env)
 		{
 			if (execve(argv[0], argv, env) == -1)
 			{
-				printf("%s: No file in working directory\n", av[0]);
+				printf("%s:No file in working directory\n", av[0]);
 			}
 			else
 				wait(&s);
