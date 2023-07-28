@@ -16,7 +16,7 @@ int prompt(char **av, char **env)
 
 	while (1)
 	{
-		if(isatty(STDIN_FILENO))
+		if (isatty(STDIN_FILENO))
 		printf("cisfun$");
 		read_chars = getline(&bufferadd, &k, stdin);
 		if (read_chars == -1)
@@ -26,7 +26,7 @@ int prompt(char **av, char **env)
 		}
 		n = 0;
 		while (bufferadd[n])
-		{ 
+		{
 			if (bufferadd[n] == '\n')
 			bufferadd[n] = 0;
 			n++;
@@ -37,7 +37,7 @@ int prompt(char **av, char **env)
 		{
 			free(bufferadd);
 			exit(EXIT_FAILURE);
-                }
+		}
 		if (newpid == 0)
 		{
 			if (execve(argv[0], argv, env) == -1)
@@ -48,4 +48,3 @@ int prompt(char **av, char **env)
 				wait(&s);
 		}
 	}
-}
