@@ -10,6 +10,6 @@
 #include <sys/wait.h>
 
 int main(int ac, char **av, char **env);
-void prompt(char **av, char **env);
+int prompt(char **av, char **env);
 
 #endif

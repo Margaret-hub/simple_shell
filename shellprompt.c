@@ -5,7 +5,7 @@
 *@env: environment
 *Return: Always return 0
 */
-void prompt(char **av, char **env)
+int prompt(char **av, char **env)
 {
 	char *bufferadd = NULL;
 	int n, s;
@@ -21,8 +21,8 @@ void prompt(char **av, char **env)
 		read_chars = getline(&bufferadd, &k, stdin);
 		if (read_chars == -1)
 		{
-			free(bufferadd);
-			exit(EXIT_FAILURE);
+			printf("Exiting shell....\n");
+			return (-1);
 		}
 		n = 0;
 		while (bufferadd[n])
@@ -37,7 +37,7 @@ void prompt(char **av, char **env)
 		{
 			free(bufferadd);
 			exit(EXIT_FAILURE);
-		}
+                }
 		if (newpid == 0)
 		{
 			if (execve(argv[0], argv, env) == -1)
